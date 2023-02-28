@@ -138,11 +138,11 @@ func GetBotGlobalLimit(token string, user *BotUserResponse) (uint, error) {
 	}
 
 	if strings.HasPrefix(token, "Bearer") {
-		return 50, nil
+		return 45, nil
 	}
 
 	if disableRestLimitDetection {
-		return 50, nil
+		return 45, nil
 	}
 
 	bot, err := doDiscordReq(context.Background(), "/api/v9/gateway/bot", "GET", nil, map[string][]string{"Authorization": {token}}, "")
@@ -178,7 +178,7 @@ func GetBotGlobalLimit(token string, user *BotUserResponse) (uint, error) {
 		if 25*concurrency > 500 {
 			return uint(25 * concurrency), nil
 		}
-		return 500, nil
+		return 45, nil
 	}
 }
 
